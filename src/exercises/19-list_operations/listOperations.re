@@ -40,7 +40,9 @@ let () = assert (myStrings(myInts) == ["1", "2", "3", "4", "5"]);
   Exercise: implement the value [myNewInts], which is obtained by adding 1 to
   each element of [myInts]
  */
-let myNewInts = ints => failwith("For you to implement");
+let myNewInts = ints => ints |> List.map( (+)(1) );
+
+let () = assert (myNewInts(myInts) == [2, 3, 4, 5, 6]);
 
 /*
   If the function you want to perform on each element of your list is one that
@@ -77,7 +79,8 @@ let () = assert (sumOfMyInts(myInts) == 15);
   Hint: Use the infix operator `mod`.
     (4 mod 2 == 0)
  */
-let numEvenInts = ints => failwith("For you to implement");
+let numEvenInts = ints =>
+  ints |> List.fold_left((acc, i) => (i mod 2) == 0 ? acc + 1 : acc, 0);
 
 /*
   Here's one more example of a useful list function: [List.find]:
