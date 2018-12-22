@@ -1,8 +1,9 @@
 /*
   As we've seen, in Reason, instead of for loops we use "higher order functions"
-  to itereate over collections like lists. Higher order functions, in other
-  words, are functions that take other functions as input. Let's take a deeper
-  look at the [List.fold_left] function, which has the signature:
+  to itereate TODO PR (typo should be "iterate") over collections like lists. 
+  Higher order functions, in other  words, are functions that take other functions 
+  as input. Let's take a deeper look at the [List.fold_left] function, which has 
+  the signature:
 
   let fold_left: (('a, 'b) => 'a, 'a, list('b)) => 'a
 
@@ -44,12 +45,19 @@ module MyList: {
    */
   let filter: ('a => bool, list('a)) => list('a);
 } = {
-  /* TODO */
-  let map = (f, lst) => failwith("For you to implement");
-  /* TODO */
-  let iter = (f, lst) => failwith("For you to implement");
-  /* TODO */
-  let filter = (f, lst) => failwith("For you to implement");
+  let map = (f, lst) =>
+    lst
+    |> List.fold_left((xs, x) => [x |> f, ... xs], [])
+    |> List.rev;
+
+  let iter = (f, lst) =>
+    lst
+    |> List.fold_left((_, x) => x |> f, ());
+
+  let filter = (f, lst) =>
+    lst
+    |> List.fold_left((xs, x) => if (x |> f) [x, ... xs] else xs, [])
+    |> List.rev;
 };
 
 /*
